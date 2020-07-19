@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}借书{% endblock %}
+{% block css %}<link href="{% static 'css/search.css' %}" rel="stylesheet"/>{% endblock %}
+
+{% block content %}
+    <div class="col-sm-3 col-md-2 sidebar" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+        <ul class="nav nav-sidebar">
+            <li><a href="/home/">个人中心</a></li>
+            <li class="active"><a href="/search/">借书</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="row placeholders">
+            <form class="form-search" action="/search/" method="get">
+                <div class="form-group">
+                    {{ search_form.keyword }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">查询</button>
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">书名</th>
+                  <th scope="col">作者</th>
+                  <th scope="col">出版社</th>
+                  <th scope="col">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for book in books %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ book.name }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.publisher }}</td>
+                        {% if book.is_available %}
+                            <td><a class="btn btn-success btn-sm" href="/borrow/?book_id={{ book.id }}">借书</a></td>
+                        {% else %}
+                            <td>已借出</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        {% if message %}
+          <div class="alert alert-warning">{{ message }}</div>
+        {% endif %}
+    </div>
+{% endblock %}

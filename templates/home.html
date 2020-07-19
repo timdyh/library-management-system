@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}个人中心{% endblock %}
+
+{% block content %}
+    <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li class="active"><a href="/home/">个人中心</a></li>
+            <li><a href="/search/">借书</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 class="page-header">正在借阅</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">书名</th>
+                  <th scope="col">作者</th>
+                  <th scope="col">出版社</th>
+                  <th scope="col">借出时间</th>
+                  <th scope="col">归还期限</th>
+                  <th scope="col">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for entry in borrow_entries %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ entry.book.name }}</td>
+                        <td>{{ entry.book.author }}</td>
+                        <td>{{ entry.book.publisher }}</td>
+                        <td>{{ entry.borrow_time }}</td>
+                        <td>{{ entry.return_ddl }}</td>
+                        <td><a class="btn btn-success btn-sm" href="/return/?book_id={{ entry.book.id }}">还书</a></td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        {% if not borrow_entries %}
+            <h5 class="page-header" align="center">您当前没有借书记录</h5>
+        {% endif %}
+    </div>
+{% endblock %}
