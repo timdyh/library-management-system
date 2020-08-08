@@ -1,3 +1,7 @@
+### <a href="https://github.com/TimDyh/library-management-system" target="_blank">项目 GitHub 仓库</a>
+
+
+
 ## 项目需求
 
 ![requirements](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-19-060202.png)
@@ -18,27 +22,27 @@
 
 1. **首页**
 
-    用户可以选择登录或注册。
+   用户可以选择登录或注册。
 
-![用例图-首页](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153949.jpg)
+   ![用例图-首页](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153949.jpg)
 
 2. **个人中心**
 
-    用户可以浏览借阅列表，对列表中的书籍进行还书操作。如果逾期，则还需要缴纳罚金。
+   用户可以浏览借阅列表，对列表中的书籍进行还书操作。如果逾期，则还需要缴纳罚金。
 
-![用例图-个人中心](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153950.jpg)
+   ![用例图-个人中心](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153950.jpg)
 
 3. **借书页面**
 
-    用户首先通过输入关键字查询相关书籍，然后对返回列表中的书籍进行借书操作。
+   用户首先通过输入关键字查询相关书籍，然后对返回列表中的书籍进行借书操作。
 
-![用例图-借书页面](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153951.jpg)
+   ![用例图-借书页面](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153951.jpg)
 
 4. **后台管理**
 
-    管理员登录后台后可以查看数据库和日志信息，必要时进行增删改查操作。
+   管理员登录后台后可以查看数据库和日志信息，必要时进行增删改查操作。
 
-![用例图-后台管理](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153952.jpg)
+   ![用例图-后台管理](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153952.jpg)
 
 ### 类图
 
@@ -67,27 +71,27 @@
 
 1. **注册**
 
-    用户打开注册页面，输入个人信息，RegisterView 获得后向 User 查询该用户是否不存在，若是则在 User 中增添该用户，并将本次注册操作写入 Log，然后返回注册成功信息。
+   用户打开注册页面，输入个人信息，RegisterView 获得后向 User 查询该用户是否不存在，若是则在 User 中增添该用户，并将本次注册操作写入 Log，然后返回注册成功信息。
 
-![顺序图-注册](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153954.jpg)
+   ![顺序图-注册](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153954.jpg)
 
 2. **登录**
 
-    用户打开登录页面，输入用户名和密码，LoginView 获得后向 User 查询该用户是否存在，若是则将本次登录操作写入 Log，然后跳转页面到用户的个人中心。HomeView 向 Borrow 查询该用户的借阅信息，并返回借阅列表。
+   用户打开登录页面，输入用户名和密码，LoginView 获得后向 User 查询该用户是否存在，若是则将本次登录操作写入 Log，然后跳转页面到用户的个人中心。HomeView 向 Borrow 查询该用户的借阅信息，并返回借阅列表。
 
-![顺序图-登录](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153955.jpg)
+   ![顺序图-登录](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153955.jpg)
 
 3. **借书**
 
-    用户打开查询界面，输入想要借的书籍的关键字，SearchView 获得后向 Book 查询相关书籍，并返回书籍列表。用户点击列表项目的借书按钮，BorrowView 向 Borrow 中增添一条该用户的借书记录，然后在 Book 中将该书籍设置为不可借，并将本次借书操作写入 Log，最后返回借书成功信息。
+   用户打开查询界面，输入想要借的书籍的关键字，SearchView 获得后向 Book 查询相关书籍，并返回书籍列表。用户点击列表项目的借书按钮，BorrowView 向 Borrow 中增添一条该用户的借书记录，然后在 Book 中将该书籍设置为不可借，并将本次借书操作写入 Log，最后返回借书成功信息。
 
-![顺序图-借书](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153958.jpg)
+   ![顺序图-借书](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-153958.jpg)
 
 4. **还书**
 
-    用户打开个人中心页面，HomeView 向 Borrow 查询该用户的借阅信息，并返回借阅列表。用户点击列表项目的还书按钮，ReturnView 从 Borrow 中删除这条借书记录，然后在 Book 中将该书籍设置为可借，并将本次还书操作写入 Log，最后返回还书成功信息。如果还书逾期，则还将返回缴纳罚金的提示信息。
+   用户打开个人中心页面，HomeView 向 Borrow 查询该用户的借阅信息，并返回借阅列表。用户点击列表项目的还书按钮，ReturnView 从 Borrow 中删除这条借书记录，然后在 Book 中将该书籍设置为可借，并将本次还书操作写入 Log，最后返回还书成功信息。如果还书逾期，则还将返回缴纳罚金的提示信息。
 
-![顺序图-还书](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-154006.jpg)
+   ![顺序图-还书](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-154006.jpg)
 
 ### 状态图
 
@@ -112,45 +116,45 @@
 
 2. 安装 MySQL 驱动 `mysqlclient` 。
 
-    ```
-    pip install mysqlclient
-    ```
+   ```
+   pip install mysqlclient
+   ```
 
 3. 在 `library/library/settings.py` 中配置数据库的 `USER` 和 `PASSWORD`。
 
-    ```python
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'library',
-            'USER': '****',
-            'PASSWORD': '************',
-            'HOST': '127.0.0.1',
-            'PORT': '3306',
-        }
-    }
-    ```
+   ```python
+   DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.mysql',
+           'NAME': 'library',
+           'USER': '****',
+           'PASSWORD': '************',
+           'HOST': '127.0.0.1',
+           'PORT': '3306',
+       }
+   }
+   ```
 
-5. 进入项目目录下。
+4. 进入项目目录下。
 
-    ```bash
-    cd ./library
-    ```
+   ```bash
+   cd ./library
+   ```
 
-6. 迁移数据库。
+5. 迁移数据库。
 
-    ```bash
-    python manage.py makemigrations
-    python manage.py migrate
-    ```
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
 
-7. 启动系统。
+6. 启动系统。
 
-    ```bash
-    python manage.py runserver
-    ```
+   ```bash
+   python manage.py runserver
+   ```
 
-8. 访问 127.0.0.1:8000 。
+7. 访问 127.0.0.1:8000 。
 
 
 
@@ -158,12 +162,10 @@
 
 1. 增加注册时的合法性检验：学号必须为 8 位（多于 8 位的部分无法输入），密码不能少于 6 位，否则将给出提示。
 
-    ![学号](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-154014.jpg)
+   ![学号](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-154014.jpg)
 
-    ![密码](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-154015.jpg)
+   ![密码](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-154015.jpg)
 
 2. 实现对书名、作者、出版社三个字段的模糊查询。此外，将有馆藏记录但当前已借出的书籍也显示出来（没有借书按钮），而不是仅展示当前能借的书籍。这样能告诉用户这本书是有的，只是当前已经被别人借走了，可以过一段时间再来查询。
 
-    ![借书](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-154024.jpg)
-
-    
+   ![借书](https://ipichub.oss-cn-hangzhou.aliyuncs.com/2020-07-18-154024.jpg)
